@@ -2,8 +2,7 @@ package com.pluralsight;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class AccountingLedgerApp {
@@ -14,7 +13,7 @@ public class AccountingLedgerApp {
             String mainMenuChoice = homeScreen().toLowerCase();
             switch(mainMenuChoice){
                 case "d":
-                    addDeposit();
+                    
                     break;
                 case "p":
 
@@ -50,24 +49,29 @@ public class AccountingLedgerApp {
         try{
             FileWriter fileWriter = new FileWriter("src/main/resources/transaction.csv",true);
             BufferedWriter bufWriter = new BufferedWriter(fileWriter);
-            bufWriter.write("Date | Time | Description| Vendor | Amount\n");
+            bufWriter.write("Date | Time | Description | Vendor | Amount\n");
             bufWriter.close();
             return new BufferedWriter(fileWriter);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
-    public static BufferedWriter addDeposit(){
+    public static String addDeposit(){
+
         System.out.println("Enter the description of the deposit:");
         String description = myScanner.nextLine();
         System.out.println("Enter the vendor of the deposit:");
         String vendor = myScanner.nextLine();
         System.out.println("Enter the amount of the deposit:");
         double amount = myScanner.nextDouble();
-        Transaction transactions = new Transaction();
-        String listOfDeposit = transactions.getDate() +" | " + transactions.getTime() +" | " + transactions.getDescription() +" | " + transactions.getVendor() +" | " +transactions.getAmount();
+        Transaction transactions = new Transaction(description, vendor, amount);
+        String listOfDeposit = transactions.getDescription() +" | " + transactions.getVendor() +" | " +transactions.getAmount();
 
-        return new BufferedWriter(fileWriter());
+        return listOfDeposit;
+    }
+    public static DateTimeFormatter dateTimeFormatter(){
+        DateTimeFormatter dateTime = DateTimeFormatter.ofPattern("yyyy-MM-dd | HH:mm");
+        return dateTime;
     }
 
 
