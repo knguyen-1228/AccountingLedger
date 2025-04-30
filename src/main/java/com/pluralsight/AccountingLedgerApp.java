@@ -11,7 +11,8 @@ import java.util.Scanner;
 
 public class AccountingLedgerApp {
     //formatting date and time also making scanner
-    static DateTimeFormatter dateTimeStamp = DateTimeFormatter.ofPattern("yyyy-MM-dd | HH:mm");
+    static DateTimeFormatter dateStamp = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    static DateTimeFormatter timeStamp = DateTimeFormatter.ofPattern("HH:mm");
     static Scanner myScanner = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -19,8 +20,6 @@ public class AccountingLedgerApp {
         ArrayList<Transaction> transactions = getTransaction();
         //switch statements
         boolean homeRunning = true;
-        boolean ledgerRunning = true;
-        boolean reportRunning = true;
         while(homeRunning){
             //taking main menu input and converting it to lowercase
             String mainMenuChoice = homeScreen().toLowerCase();
@@ -44,6 +43,7 @@ public class AccountingLedgerApp {
                     myScanner.nextLine();
                     break;
                 case "l":
+                    boolean ledgerRunning = true;
                     while(ledgerRunning){
                         //taking ledger input and converting to lowercase
                         String ledgerChoice = ledgerScreen().toLowerCase();
@@ -52,7 +52,7 @@ public class AccountingLedgerApp {
                                 //calls allLedger method
                                 allLedger(transactions);
                                 //ask the user to return to the ledger screen
-                                System.out.println("Would you like to return to the ledger?");
+                                System.out.println("\nWould you like to return to the ledger?");
                                 myScanner.nextLine();
                                 break;
                             case "d":
@@ -70,6 +70,7 @@ public class AccountingLedgerApp {
                                 myScanner.nextLine();
                                 break;
                             case "r":
+                                boolean reportRunning = true;
                                 while(reportRunning) {
                                     //take report input
                                     int reportChoice = reportScreen();
@@ -77,22 +78,32 @@ public class AccountingLedgerApp {
                                         case 1:
                                             //calls month to date method
                                             monthToDate(transactions);
+                                            System.out.println("Would you like to return to the Report?");
+                                            myScanner.nextLine();
                                             break;
                                         case 2:
                                             //calls previous month method
                                             previousMonth(transactions);
+                                            System.out.println("Would you like to return to the Report?");
+                                            myScanner.nextLine();
                                             break;
                                         case 3:
                                             //calls year to date method
                                             yearToDate(transactions);
+                                            System.out.println("Would you like to return to the Report?");
+                                            myScanner.nextLine();
                                             break;
                                         case 4:
                                             //calls previous year method
                                             previousYear(transactions);
+                                            System.out.println("Would you like to return to the Report?");
+                                            myScanner.nextLine();
                                             break;
                                         case 5:
                                             //calls search vendor method
                                             searchVendor(transactions);
+                                            System.out.println("Would you like to return to the Report?");
+                                            myScanner.nextLine();
                                             break;
                                         case 0:
                                             //returns to ledger screen
@@ -210,7 +221,7 @@ public class AccountingLedgerApp {
         //eats the empty line
         myScanner.nextLine();
         //combine all user inputs into string and returning it
-        String transactions = dateTime.format(dateTimeStamp) + " | " + description +" | "+ vendor + " | " + amount + "\n";
+        String transactions = dateTime.format(dateStamp) + " | " + dateTime.format(timeStamp) + " | " + description +" | "+ vendor + " | " + amount + "\n";
         return transactions;
     }
     //method to add payment
@@ -229,7 +240,7 @@ public class AccountingLedgerApp {
         //eats the empty line
         myScanner.nextLine();
         //combining user input into string and returning it
-        String listOfPayments = dateTime.format(dateTimeStamp) + " | " + description +" | "+ vendor + " | " + amount + "\n";
+        String listOfPayments = dateTime.format(dateStamp) + " | " + dateTime.format(timeStamp) + " | " + description +" | "+ vendor + " | " + amount + "\n";
         return listOfPayments;
 
     }
@@ -318,23 +329,124 @@ public class AccountingLedgerApp {
     }
     //method to call month to date
     public static void monthToDate(ArrayList<Transaction> transactions){
-
+        //gets local time of today
+        LocalDate today = LocalDate.now();
+        //gets the first day of the month
+        LocalDate firstOfTheMonth = today.withDayOfMonth(1);
+        System.out.println("Here are the Month to Date report");
+        String output = "";
+        for(int i = 0; i < transactions.size();i++){
+            //getting the transaction array and date
+            Transaction t = transactions.get(i);
+            LocalDate targetDate = t.getDate();
+            //checks to show everything from the first day of the month to current day to include today
+            if(!targetDate.isAfter(today) && !targetDate.isBefore(firstOfTheMonth)){
+                output += String.format("%tF %tT %s %s $%.2f%n", t.getDate(), t.getTime(), t.getDescription(), t.getVendor(), t.getAmount());
+            }
+        }
+        //if there is nothing then it will show no payments
+        if(output.equals("")){
+            System.out.println("No payments available");
+        }else{
+            System.out.println(output);
+        }
     }
     //method to call previous month
     public static void previousMonth(ArrayList<Transaction> transactions){
-
+        //gets current date
+        LocalDate today = LocalDate.now();
+        //gets the first day of last month
+        LocalDate startPrevMonth = today.minusMonths(1).withDayOfMonth(1);
+        //gets the last day of the month
+        LocalDate endPrevMonth = today.withDayOfMonth(1).minusDays(1);
+        System.out.println("Here are the Previous Months report");
+        String output = "";
+        for(int i = 0; i < transactions.size();i++){
+            //getting the transaction array and date
+            Transaction t = transactions.get(i);
+            LocalDate targetDate = t.getDate();
+            //checks to show everything from the first day of the month to today
+            if(!targetDate.isBefore(startPrevMonth) && !targetDate.isAfter(endPrevMonth)){
+                output += String.format("%tF %tT %s %s $%.2f%n", t.getDate(), t.getTime(), t.getDescription(), t.getVendor(), t.getAmount());
+            }
+        }
+        //if there is nothing then it will show no payments
+        if(output.equals("")){
+            System.out.println("No payments available");
+        }else{
+            System.out.println(output);
+        }
     }
     //method to call year to date
     public static void yearToDate(ArrayList<Transaction> transactions){
-
+        //gets local time of today
+        LocalDate today = LocalDate.now();
+        //gets the first day of the year
+        LocalDate firstOfTheYear = today.withDayOfYear(1);
+        System.out.println("Here are the Year to Date report");
+        String output = "";
+        for(int i = 0; i < transactions.size();i++){
+            //getting the transaction array and date
+            Transaction t = transactions.get(i);
+            LocalDate targetDate = t.getDate();
+            //checks to show everything from the first day of the year to last day of the year
+            if(!targetDate.isBefore(firstOfTheYear) && !targetDate.isAfter(today)){
+                output += String.format("%tF %tT %s %s $%.2f%n", t.getDate(), t.getTime(), t.getDescription(), t.getVendor(), t.getAmount());
+            }
+        }
+        //if there is nothing then it will show no payments
+        if(output.equals("")){
+            System.out.println("No payments available");
+        }else{
+            System.out.println(output);
+        }
     }
     //method to call previous year
     public static void previousYear(ArrayList<Transaction> transactions){
-
+        LocalDate today = LocalDate.now();
+        //gets the first day of last year
+        LocalDate startPrevYear = today.minusYears(1).withDayOfYear(1);
+        //gets the last day of last year
+        LocalDate endPrevYear = today.withDayOfYear(1).minusDays(1);
+        System.out.println("Here are the Previous Year report");
+        String output = "";
+        for(int i = 0; i < transactions.size();i++){
+            //getting the transaction array and date
+            Transaction t = transactions.get(i);
+            LocalDate targetDate = t.getDate();
+            //checks to show everything from the first day of the previous year to end of last year
+            if(!targetDate.isBefore(startPrevYear) && !targetDate.isAfter(endPrevYear)){
+                output += String.format("%tF %tT %s %s $%.2f%n", t.getDate(), t.getTime(), t.getDescription(), t.getVendor(), t.getAmount());
+            }
+        }
+        //if there is nothing then it will show no payments
+        if(output.equals("")){
+            System.out.println("No payments available");
+        }else{
+            System.out.println(output);
+        }
     }
     //method to call search by vendor
     public static void searchVendor(ArrayList<Transaction> transactions){
-
+        //asking for user input for vendor and storing it
+        System.out.println("What vendor would you like to look up");
+        String vendor = myScanner.nextLine();
+        System.out.println("Here are the report by vendor:" + vendor);
+        String output = "";
+        for(int i = 0; i < transactions.size();i++){
+            //getting the transaction array
+            Transaction t = transactions.get(i);
+            //checks to see if user input is equal to anything in array
+            if(t.getVendor().equalsIgnoreCase(vendor)){
+                output += String.format("%tF %tT %s %s $%.2f%n", t.getDate(), t.getTime(), t.getDescription(), t.getVendor(), t.getAmount());
+            }
+        }
+        //if there is nothing then it will show no payments
+        if(output.equals("")){
+            System.out.println("No payments available");
+        }else{
+            System.out.println(output);
+        }
     }
 
 }

@@ -1,7 +1,50 @@
 Date | Time | Description | Vendor | Amount
-2025-04-29 | 15:38 | food | canes | 15.99
-2025-04-29 | 15:38 | food | cabo bob | 25.99
-2025-04-29 | 16:37 | food | mcdonalds | 5.99
-2025-04-29 | 17:07 | invoice | kevin | -199.99
-2025-04-29 | 17:10 | couch | amazon | 5000.00
-2025-04-29 | 17:11 | food | cabo bob | -25.00
+2024-12-01 | 09:00 | Initial Deposit | Bank | 1000.00
+2024-12-05 | 13:15 | Office Rent | Landlord | -700.00
+2024-12-10 | 11:45 | Supplies | Staples | -150.00
+2024-12-15 | 15:30 | Client Payment | Acme Corp | 1200.00
+2024-12-20 | 14:20 | Coffee with Client | Starbucks | -12.50
+2025-01-02 | 10:00 | Hosting Fee | Bluehost | -85.00
+2025-01-06 | 09:50 | Software License | Microsoft | -199.99
+2025-01-10 | 12:05 | Client Payment | GlobalTech | 850.00
+2025-01-14 | 16:45 | Business Lunch | Olive Garden | -43.25
+2025-01-18 | 11:35 | Refund | Vendor A | 45.00
+2025-01-22 | 14:15 | Printer Purchase | Best Buy | -210.00
+2025-01-28 | 09:30 | Project Payment | Delta LLC | 1300.00
+2025-02-01 | 10:45 | Payroll | Employees | -2500.00
+2025-02-03 | 13:00 | Maintenance | TechHelp | -120.00
+2025-02-05 | 15:20 | New Contract | Client X | 2000.00
+2025-02-09 | 16:10 | Coffee | Local Cafe | -6.75
+2025-02-12 | 11:10 | Office Snacks | Costco | -35.00
+2025-02-17 | 09:25 | Payment from Client | Zeta Inc | 1100.00
+2025-02-21 | 13:50 | Subscription Renewal | Zoom | -15.00
+2025-02-25 | 10:05 | Bonus Payment | Admin Dept | 500.00
+2025-03-01 | 09:10 | Utilities | EnergyCo | -125.00
+2025-03-03 | 14:40 | New Client Payment | BetaWorks | 1800.00
+2025-03-07 | 13:00 | Travel Reimbursement | TravelPro | 150.00
+2025-03-10 | 11:55 | Cloud Service | AWS | -300.00
+2025-03-13 | 10:50 | Invoice Payment | Client Y | 950.00
+2025-03-15 | 12:15 | Office Chairs | Ikea | -400.00
+2025-03-18 | 16:20 | Lunch Meeting | Cafe Nero | -22.50
+2025-03-22 | 15:00 | Tax Refund | IRS | 200.00
+2025-03-25 | 14:10 | Ad Spend | Google Ads | -250.00
+2025-03-28 | 09:45 | Final March Payment | Omega Inc | 1700.00
+2025-04-01 | 10:30 | Opening Balance | Bank | 1000.00
+2025-04-03 | 14:00 | Office Internet | Comcast | -99.00
+2025-04-06 | 12:20 | Payment Received | Acme Corp | 700.00
+2025-04-09 | 13:15 | Supplies Order | Office Depot | -180.00
+2025-04-12 | 10:50 | Parking Fee | City Garage | -10.00
+2025-04-14 | 11:05 | Workshop Revenue | BizCon | 1200.00
+2025-04-17 | 16:30 | Marketing Spend | Facebook | -300.00
+2025-04-19 | 15:15 | Refund Issued | Vendor C | -60.00
+2025-04-21 | 09:30 | Reimbursement | HR Dept | 75.00
+2025-04-22 | 14:40 | Final April Client | Nova Inc | 1550.00
+2025-04-24 | 10:00 | Laptop Purchase | Dell | -950.00
+2025-04-25 | 17:45 | Client Meeting Coffee | Starbucks | -8.50
+2025-04-26 | 13:22 | Bonus Received | HR Dept | 250.00
+2025-04-28 | 12:35 | Expense Refund | Vendor B | 90.00
+2025-04-29 | 11:00 | Software License | JetBrains | -149.99
+2025-04-30 | 09:50 | Monthly Fee | G Suite | -25.00
+2025-04-30 | 11:40 | Client payment | Acme corp | 1200.0
+2025-04-30 | 11:43 | invoice | Acme | 1200.0
+2025-04-30 | 11:44 | rent | landlord | -1200.0
