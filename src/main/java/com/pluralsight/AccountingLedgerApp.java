@@ -8,6 +8,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 public class AccountingLedgerApp {
     //formatting date and time also making scanner
@@ -16,6 +17,7 @@ public class AccountingLedgerApp {
     static Scanner myScanner = new Scanner(System.in);
 
     public static void main(String[] args) {
+        loadingBar("Loading", 25,60);
         //creating an array
         ArrayList<Transaction> transactions = getTransaction();
         //switch statements
@@ -128,6 +130,38 @@ public class AccountingLedgerApp {
                     break;
             }
         }
+
+    }
+    //loading bar
+    public static void loadingBar(String message, int length, long timeInterval){
+        //creating variables for the solid block and light shade block
+        String incomplete = "░";
+        String complete = "█";
+        //creating a string builder
+        StringBuilder builder = new StringBuilder();
+        //for loop to add light shade blocks into string
+        for(int i = 0; i<length; i++){
+            builder.append(incomplete);
+        }
+        //prints the message
+        System.out.println(message);
+        //for loop for the progress bar
+        for(int i = 0; i < length; i++){
+            //replacing incomplete with complete
+            builder.replace(i, i+1, String.valueOf(complete));
+            //calculate the percentage of current completion
+            int percent = (i +1)* 100 /length;
+            //moves the cursor to the beginning and overwrites the line also prints the progress bar
+            String progressBar = "\r" + builder + " " + percent + "%";
+            System.out.print(progressBar);
+            //includes a pause in between
+            try{
+                Thread.sleep(timeInterval);
+            }catch (InterruptedException ignored){
+
+            }
+        }
+        System.out.println("\n");
 
     }
     //method that creates array
